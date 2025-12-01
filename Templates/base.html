@@ -19,31 +19,48 @@
     <!-- Navbar -->
     <nav class="bg-white shadow-md fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
+
+            <!-- Logo -->
             <a href="/" class="text-2xl font-bold text-teal-700">Sishemo</a>
-            <div class="space-x-6 hidden md:flex">
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6">
                 <a href="/" class="hover:text-teal-600">Home</a>
                 <a href="/sections/" class="hover:text-teal-600">Library</a>
                 <a href="/about/" class="hover:text-teal-600">About</a>
                 <a href="/contact/" class="hover:text-teal-600">Contact</a>
             </div>
+
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMenu()" class="md:hidden text-2xl text-gray-700 focus:outline-none">
+                ☰
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden bg-white border-t border-gray-200 md:hidden">
+            <a href="/" class="block px-4 py-2 hover:bg-gray-100">Home</a>
+            <a href="/sections/" class="block px-4 py-2 hover:bg-gray-100">Library</a>
+            <a href="/about/" class="block px-4 py-2 hover:bg-gray-100">About</a>
+            <a href="/contact/" class="block px-4 py-2 hover:bg-gray-100">Contact</a>
         </div>
     </nav>
 
     <!-- Page Content -->
-    <div class="pt-20">
+    <div class="pt-24 px-4 sm:px-6 lg:px-8">
         {% block content %}{% endblock %}
     </div>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-300 mt-16">
-        <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-6">
+        <div class="max-w-7xl mx-auto px-4 py-10 grid gap-8 sm:grid-cols-2 md:grid-cols-3">
             <div>
                 <h2 class="text-lg font-bold text-white">Sishemo Education Trust</h2>
                 <p class="mt-2 text-sm">Empowering learners with knowledge and creativity.</p>
             </div>
             <div>
                 <h3 class="font-semibold text-white">Quick Links</h3>
-                <ul class="mt-2 space-y-1">
+                <ul class="mt-2 space-y-1 text-sm">
                     <li><a href="/" class="hover:text-white">Home</a></li>
                     <li><a href="/sections/" class="hover:text-white">Library</a></li>
                     <li><a href="/about/" class="hover:text-white">About</a></li>
@@ -68,6 +85,11 @@
             duration: 1000,
             once: true
         });
+
+        function toggleMenu() {
+            let menu = document.getElementById("mobileMenu");
+            menu.classList.toggle("hidden");
+        }
     </script>
     
 </body>

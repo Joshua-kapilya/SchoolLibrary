@@ -2,32 +2,36 @@
 {% load static %}
 
 {% block content %}
-<div class="max-w-5xl mx-auto px-6 py-12">
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
   <!-- Header -->
   <div class="text-center mb-10" data-aos="fade-up">
-    <h1 class="text-3xl font-bold text-teal-700">
+    <h1 class="text-3xl sm:text-4xl font-bold text-teal-700">
       Comprehension – {{ section.name }}
     </h1>
-    <p class="text-gray-600 mt-2">
+    <p class="text-gray-600 mt-2 text-sm sm:text-base">
       Select a grade to view comprehension passages and questions.
     </p>
   </div>
 
   <!-- Grades Grid -->
-  <div class="grid md:grid-cols-3 gap-8">
+  <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
 
     {% for grade in grades %}
     <a href="{% url 'grade_comprehension' grade.id %}"
-       class="bg-white p-8 rounded-2xl shadow hover:shadow-xl transform hover:-translate-y-2 transition"
+       class="bg-white p-6 sm:p-8 rounded-2xl shadow hover:shadow-xl transform hover:-translate-y-2 transition duration-300"
        data-aos="zoom-in" data-aos-delay="{{ forloop.counter0 }}00">
 
-      <div class="text-5xl mb-4">📖</div>
-      <h3 class="text-xl font-semibold text-teal-700">Grade {{ grade.name }}</h3>
-      <p class="mt-2 text-gray-600">View comprehension tasks for this grade.</p>
+      <div class="text-4xl sm:text-5xl mb-4 text-center">📖</div>
+      <h3 class="text-lg sm:text-xl font-semibold text-teal-700 text-center">Grade {{ grade.name }}</h3>
+      <p class="mt-2 text-gray-600 text-center text-sm sm:text-base">
+        View comprehension tasks for this grade.
+      </p>
     </a>
     {% empty %}
-    <p class="text-gray-600 col-span-3 text-center">No grades available for this section.</p>
+    <p class="text-gray-600 col-span-1 md:col-span-2 lg:col-span-3 text-center">
+      No grades available for this section.
+    </p>
     {% endfor %}
 
   </div>
