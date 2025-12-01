@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ section.name }} - Sishemo Education Trust{% endblock %}
+
+{% block content %}
+<section class="py-20 bg-gray-50">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h1 class="text-4xl font-bold text-gray-800 mb-6" data-aos="fade-up">
+      {{ section.name }}
+    </h1>
+    <p class="text-lg text-gray-600 mb-12" data-aos="fade-up" data-aos-delay="200">
+      Choose what you’d like to explore in the {{ section.name }} section.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Books -->
+      <a href=" {% url 'section_grades' section.id  %} " class="bg-white rounded-2xl shadow hover:shadow-xl p-8 transform hover:-translate-y-2 transition"
+         data-aos="zoom-in">
+        <div class="text-5xl mb-4">📚</div>
+        <h3 class="text-xl font-semibold text-teal-700">Books</h3>
+        <p class="mt-2 text-gray-600">Browse books tailored for {{ section.name }}.</p>
+      </a>
+
+      <!-- Notes -->
+      <a href="{% url 'section_notes' section.id %}" 
+         class="bg-white rounded-2xl shadow hover:shadow-xl p-8 transform hover:-translate-y-2 transition"
+         data-aos="zoom-in" data-aos-delay="200">
+        <div class="text-5xl mb-4">📝</div>
+        <h3 class="text-xl font-semibold text-teal-700">Notes</h3>
+        <p class="mt-2 text-gray-600">Structured notes organized by subjects and topics.</p>
+      </a>
+
+      <!-- Tutorials -->
+      <a href="#" class="bg-white rounded-2xl shadow hover:shadow-xl p-8 transform hover:-translate-y-2 transition"
+         data-aos="zoom-in" data-aos-delay="400">
+        <div class="text-5xl mb-4">🎥</div>
+        <h3 class="text-xl font-semibold text-teal-700">Tutorials</h3>
+        <p class="mt-2 text-gray-600">Interactive tutorials and resources for better understanding.</p>
+      </a>
+      <!-- Comprehension -->
+        <a href="{% url 'section_comprehension' section.id %}" class="bg-white rounded-2xl shadow hover:shadow-xl p-8 transform hover:-translate-y-2 transition" data-aos="zoom-in" data-aos-delay="600">
+        <div class="text-5xl mb-4">📖</div>
+        <h3 class="text-xl font-semibold text-teal-700">Comprehension</h3>
+        <p class="mt-2 text-gray-600">Practice comprehension passages and questions for {{ section.name }}.</p>
+        </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

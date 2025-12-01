@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+/* CKEditor Content Styling */
+.ck-content {
+    font-family: "Inter", "Segoe UI", sans-serif;
+    line-height: 1.8;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Paragraphs */
+.ck-content p {
+    margin-bottom: 1rem;
+}
+
+/* Headings */
+.ck-content h1,
+.ck-content h2,
+.ck-content h3,
+.ck-content h4 {
+    font-family: "Merriweather", serif;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: #111;
+}
+
+.ck-content h1 { font-size: 2rem; }
+.ck-content h2 { font-size: 1.75rem; }
+.ck-content h3 { font-size: 1.5rem; }
+
+/* Lists */
+.ck-content ul,
+.ck-content ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.ck-content li {
+    margin-bottom: 0.4rem;
+}
+
+/* Links */
+.ck-content a {
+    color: #2563eb;
+    text-decoration: underline;
+}
+.ck-content a:hover {
+    text-decoration: none;
+}
+
+/* Images */
+.ck-content img {
+    width: 100%;
+    border-radius: 12px;
+    margin: 1rem 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Blockquote */
+.ck-content blockquote {
+    border-left: 6px solid #3b82f6;
+    background: #f3f6ff;
+    padding: 1rem 1.2rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: #444;
+    border-radius: 8px;
+}
+
+/* Tables */
+.ck-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.ck-content table th,
+.ck-content table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.ck-content table th {
+    background: #f0f4ff;
+    font-weight: 600;
+}
+
+/* Code blocks */
+.ck-content pre {
+    background: #1e1e1e;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.ck-content code {
+    background: #eee;
+    padding: 3px 5px;
+    border-radius: 4px;
+}
+</style>
+
+<div class="max-w-4xl mx-auto py-10 px-4">
+
+    <!-- Topic Header -->
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">{{ topic.name }}</h1>
+        <p class="text-gray-600">Total Notes: {{ notes.count }}</p>
+    </div>
+
+    <!-- Notes List -->
+    <div class="space-y-4">
+        {% for note in notes %}
+        <div class="bg-white shadow rounded-xl p-6 border border-gray-200">
+            <h2 class="text-xl font-semibold text-gray-800">{{ note.title }}</h2>
+
+            <!-- CKEditor content -->
+            <div class="prose prose-lg max-w-none ck-content mt-2">
+                {{ note.content|safe }}
+            </div>
+
+            <p class="text-sm text-gray-400 mt-4">
+                Created: {{ note.created_at|date:"M d, Y" }}
+            </p>
+        </div>
+        {% empty %}
+        <p class="text-gray-500 text-center mt-10">
+            No notes available for this topic.
+        </p>
+        {% endfor %}
+    </div>
+
+    <!-- Back Button -->
+    <div class="mt-10">
+        <a href="{% url 'subject_topics' topic.subject.id %}" 
+           class="inline-block bg-blue-600 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-700 transition">
+           ← Back to Topics
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

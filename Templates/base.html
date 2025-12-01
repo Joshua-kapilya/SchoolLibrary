@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Sishemo Education Trust{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Lottie Animations -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
+            <a href="/" class="text-2xl font-bold text-teal-700">Sishemo</a>
+            <div class="space-x-6 hidden md:flex">
+                <a href="/" class="hover:text-teal-600">Home</a>
+                <a href="/sections/" class="hover:text-teal-600">Library</a>
+                <a href="/about/" class="hover:text-teal-600">About</a>
+                <a href="/contact/" class="hover:text-teal-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="pt-20">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 mt-16">
+        <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-6">
+            <div>
+                <h2 class="text-lg font-bold text-white">Sishemo Education Trust</h2>
+                <p class="mt-2 text-sm">Empowering learners with knowledge and creativity.</p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-white">Quick Links</h3>
+                <ul class="mt-2 space-y-1">
+                    <li><a href="/" class="hover:text-white">Home</a></li>
+                    <li><a href="/sections/" class="hover:text-white">Library</a></li>
+                    <li><a href="/about/" class="hover:text-white">About</a></li>
+                    <li><a href="/contact/" class="hover:text-white">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-semibold text-white">Contact</h3>
+                <p class="mt-2 text-sm">Email: info@sishemo.edu</p>
+                <p class="text-sm">Phone: +260 97 123 4567</p>
+            </div>
+        </div>
+        <div class="text-center py-4 text-sm bg-gray-800">
+            © 2025 Sishemo Education Trust. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+    
+</body>
+</html>

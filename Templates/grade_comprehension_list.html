@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="relative overflow-hidden">
+
+    <!-- Floating Background Blobs -->
+    <div class="absolute top-0 -left-20 w-72 h-72 bg-teal-300 opacity-40 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-0 -right-20 w-96 h-96 bg-purple-300 opacity-40 rounded-full blur-3xl animate-ping"></div>
+
+    <div class="max-w-6xl mx-auto px-6 py-20 relative">
+
+        <!-- Header -->
+        <div class="text-center mb-16" data-aos="fade-down">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-teal-700 drop-shadow-xl">
+                Grade {{ grade.name }} • Comprehension
+            </h1>
+            <p class="text-gray-700 mt-3 text-lg">
+                Choose a story to read and explore!
+            </p>
+        </div>
+
+        <!-- Grid of Comprehensions -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+
+            {% for comp in comprehensions %}
+            <a href="{% url 'read_comprehension' grade.id comp.slug %}"
+                class="group relative bg-white/60 backdrop-blur-xl rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-white/30"
+                data-aos="zoom-in">
+
+                <!-- Card Glow on Hover -->
+                <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-teal-200 to-purple-200 opacity-0 
+                    group-hover:opacity-40 blur-2xl transition duration-500"></div>
+
+                <!-- Image -->
+                {% if comp.image %}
+                <img src="{{ comp.image.url }}" class="rounded-t-3xl h-48 w-full object-cover shadow-md">
+                {% else %}
+                <div class="h-48 bg-gray-200 rounded-t-3xl flex items-center justify-center text-6xl shadow-md">
+                    📖
+                </div>
+                {% endif %}
+
+                <!-- Text -->
+                <div class="p-6 relative">
+                    <h3 class="text-xl font-bold text-teal-800 group-hover:text-purple-700 transition">
+                        {{ comp.title }}
+                    </h3>
+                    <p class="text-gray-700 mt-2 text-sm">
+                        Tap to read the full passage and questions.
+                    </p>
+                </div>
+
+            </a>
+            {% empty %}
+            <p class="text-center col-span-3 text-gray-600 text-lg">No comprehension available for this grade.</p>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

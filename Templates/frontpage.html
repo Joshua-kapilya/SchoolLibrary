@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Welcome - Sishemo Education Trust{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white h-[90vh] flex items-center overflow-hidden">
+    <!-- Floating bubbles -->
+    <div class="absolute top-0 left-0 w-6 h-6 bg-white opacity-20 rounded-full animate-bounce-slow"></div>
+    <div class="absolute top-20 right-10 w-10 h-10 bg-white opacity-15 rounded-full animate-bounce-slower"></div>
+    <div class="absolute bottom-10 left-20 w-8 h-8 bg-white opacity-10 rounded-full animate-bounce-slow"></div>
+    <div class="absolute bottom-32 right-32 w-6 h-6 bg-white opacity-25 rounded-full animate-bounce-slower"></div>
+
+    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-center relative z-10">
+        <div data-aos="fade-right">
+            <h1 class="text-4xl md:text-6xl font-bold leading-tight">Welcome to <br> Sishemo Education Trust</h1>
+            <p class="mt-6 text-lg">Nurturing young minds through knowledge, innovation, and creativity. Explore our digital library for books, notes, and resources.</p>
+            <a href="/sections/" class="mt-6 inline-block bg-white text-purple-700 px-6 py-3 rounded-full font-semibold shadow-md hover:bg-gray-100 transition">
+                Explore Library
+            </a>
+        </div>
+
+        <!-- Animated Lottie -->
+        <div class="flex justify-center md:justify-end" data-aos="fade-left">
+            <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_zrqthn6o.json" 
+                background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay>
+            </lottie-player>
+        </div>
+    </div>
+</section>
+
+
+<!-- Sections Highlight -->
+<section class="py-16 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold text-gray-800" data-aos="fade-up">Our Sections</h2>
+    <p class="mt-2 text-gray-600" data-aos="fade-up" data-aos-delay="200">
+      Choose your section and access tailored resources.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-8 mt-10">
+      {% for section in sections %}
+        <a href="{% url 'section_detail' section.id %}" 
+           class="block bg-white p-6 rounded-2xl shadow hover:shadow-lg transition transform hover:-translate-y-2"
+           data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:200 }}">
+           
+          <h3 class="text-xl font-semibold text-teal-700">
+            {{ section.get_name_display }}
+          </h3>
+          <p class="mt-2 text-gray-600">
+            Explore {{ section.get_name_display }} resources.
+          </p>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- About Section -->
+<section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+        <div data-aos="fade-right">
+            <img src="https://source.unsplash.com/600x400/?library,school" alt="Library" class="rounded-2xl shadow-lg">
+        </div>
+        <div data-aos="fade-left">
+            <h2 class="text-3xl font-bold text-gray-800">Why Choose Sishemo?</h2>
+            <p class="mt-4 text-gray-600">We believe every learner deserves access to quality learning resources. Our library is designed to empower learners, teachers, and parents with rich content, notes, and study materials.</p>
+            <ul class="mt-4 space-y-2 text-gray-700">
+                <li>✔️ Free access to books and notes</li>
+                <li>✔️ Well-structured subjects and topics</li>
+                <li>✔️ Teachers contribute and update resources</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
