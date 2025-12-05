@@ -68,6 +68,8 @@ class Topic(models.Model):
     grade = models.ForeignKey(Grade, on_delete=models.CASCADE, null=True, blank=True)
 
     title = models.CharField(max_length=200)
+    order = models.IntegerField(default=0)
+
 
     class Meta:
         unique_together = ("subject", "grade", "title")
