@@ -113,6 +113,13 @@ USE_I18N = True
 
 USE_TZ = True
 
+# settings.py
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://schoollibrary-production.up.railway.app",  # replace with your Railway URL
+]
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
