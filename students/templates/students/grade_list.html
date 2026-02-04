@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Grades{% endblock %}
+
+{% block content %}
+<div class="p-6">
+    <h1 class="text-2xl font-bold text-teal-700 mb-6">Student Grades</h1>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+
+        <!-- Early Classes -->
+        <a href="{% url 'students:grade_students' 'BEGINNERS' %}" class="bg-white p-4 rounded-lg shadow hover:bg-teal-50 border text-center font-semibold">
+            BEGINNERS
+        </a>
+
+        <a href="{% url 'students:grade_students' 'Middle Class' %}" class="bg-white p-4 rounded-lg shadow hover:bg-teal-50 border text-center font-semibold">
+            Middle Class
+        </a>
+
+        <a href="{% url 'students:grade_students' 'Reception' %}" class="bg-white p-4 rounded-lg shadow hover:bg-teal-50 border text-center font-semibold">
+            Reception
+        </a>
+
+        <!-- Primary Grades -->
+        <a href="{% url 'students:grade_students' 'Grade 1' %}" class="bg-white p-4 rounded-lg shadow hover:bg-teal-50 border text-center font-semibold">
+            Grade 1
+        </a>
+
+        <a href="{% url 'students:grade_students' 'Grade 2' %}" class="bg-white p-4 rounded-lg shadow hover:bg-teal-50 border text-center font-semibold">
+            Grade 2
+        </a>
+
+        <a href="{% url 'students:grade_students' 'Grade 3' %}" class="bg-white p-4 rounded-lg shadow hover:bg-teal-50 border text-center font-semibold">
+            Grade 3
+        </a>
+
+        <a href="{% url 'students:grade_students' 'Grade 4' %}" class="bg-white p-4 rounded-lg shadow hover:bg-teal-50 border text-center font-semibold">
+            Grade 4
+        </a>
+
+        <a href="{% url 'students:grade_students' 'Grade 5' %}" class="bg-white p-4 rounded-lg shadow hover:bg-teal-50 border text-center font-semibold">
+            Grade 5
+        </a>
+
+        <a href="{% url 'students:grade_students' 'Grade 6' %}" class="bg-white p-4 rounded-lg shadow hover:bg-teal-50 border text-center font-semibold">
+            Grade 6
+        </a>
+
+        <a href="{% url 'students:grade_students' 'Grade 7' %}" class="bg-white p-4 rounded-lg shadow hover:bg-teal-50 border text-center font-semibold">
+            Grade 7
+        </a>
+
+        <!-- Secondary -->
+        <a href="{% url 'students:grade_students' 'Form 1' %}" class="bg-white p-4 rounded-lg shadow hover:bg-teal-50 border text-center font-semibold">
+            Form 1
+        </a>
+
+        <a href="{% url 'students:grade_students' 'Form 2' %}" class="bg-white p-4 rounded-lg shadow hover:bg-teal-50 border text-center font-semibold">
+            Form 2
+        </a>
+
+    </div>
+</div>
+{% endblock %}
