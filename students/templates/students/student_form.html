@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Add Student{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto p-8 bg-white shadow rounded-xl mt-10">
+    <h1 class="text-2xl font-bold text-teal-700 mb-6">Add Student to {{ grade.name }}</h1>
+
+    <form method="post" enctype="multipart/form-data" class="space-y-4">
+        {% csrf_token %}
+
+        <!-- User Fields -->
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                {{ form.username.label_tag }}
+                {{ form.username }}
+            </div>
+            <div>
+                {{ form.password.label_tag }}
+                {{ form.password }}
+            </div>
+            <div>
+                {{ form.first_name.label_tag }}
+                {{ form.first_name }}
+            </div>
+            <div>
+                {{ form.last_name.label_tag }}
+                {{ form.last_name }}
+            </div>
+            <div class="col-span-2">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+            </div>
+        </div>
+
+        <!-- Student Fields -->
+        <div class="grid grid-cols-1 gap-4">
+            {{ form.photo.label_tag }} {{ form.photo }}
+            {{ form.full_photo.label_tag }} {{ form.full_photo }}
+            {{ form.parent.label_tag }} {{ form.parent }}
+            {{ form.on_transport.label_tag }} {{ form.on_transport }}
+            {{ form.on_school_lunch.label_tag }} {{ form.on_school_lunch }}
+            {{ form.height_cm.label_tag }} {{ form.height_cm }}
+            {{ form.nationality.label_tag }} {{ form.nationality }}
+            {{ form.tribe.label_tag }} {{ form.tribe }}
+            {{ form.address.label_tag }} {{ form.address }}
+        </div>
+
+        <button type="submit" class="bg-teal-600 text-white px-6 py-2 rounded-lg mt-4 hover:bg-teal-700">
+            Save Student
+        </button>
+    </form>
+</div>
+{% endblock %}

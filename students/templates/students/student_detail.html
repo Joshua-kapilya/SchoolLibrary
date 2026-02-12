@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{ student.profile.user.get_full_name }} | Student Profile
+{% endblock %}
+
+{% block content %}
+<div class="bg-gradient-to-br from-slate-50 to-teal-50 min-h-screen p-6">
+
+    <!-- Breadcrumb -->
+    <div class="max-w-7xl mx-auto mb-6 text-sm text-gray-500">
+        <a href="{% url 'home' %}" class="hover:text-teal-600">Home</a>
+        <span class="mx-2">/</span>
+        <span class="font-medium text-gray-700">
+            {{ student.profile.user.get_full_name }}
+        </span>
+    </div>
+
+    <!-- Main Card -->
+    <div class="max-w-7xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden">
+
+        <div class="grid grid-cols-1 lg:grid-cols-3">
+
+            <!-- ========================= -->
+            <!-- FULL BODY PHOTO COLUMN -->
+            <!-- ========================= -->
+            <div class="relative bg-gray-100 flex items-center justify-center p-6">
+
+                {% if student.full_photo %}
+                    <img
+                        src="{{ student.full_photo.url }}"
+                        alt="Full photo"
+                        class="w-full max-h-[650px] object-contain rounded-2xl shadow-lg"
+                    >
+                {% else %}
+                    <div class="text-center">
+                        <img
+                            src="{% static 'images/default-avatar.png' %}"
+                            class="w-48 mx-auto opacity-50"
+                        >
+                        <p class="mt-4 text-gray-500">
+                            No full photo uploaded
+                        </p>
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <!-- ========================= -->
+            <!-- DETAILS COLUMN -->
+            <!-- ========================= -->
+            <div class="lg:col-span-2 p-10">
+
+                <!-- Header -->
+                <div class="flex flex-col md:flex-row md:items-center gap-6 mb-10">
+
+                    <!-- Avatar -->
+                    <div class="w-28 h-28 shrink-0">
+
+                        {% if student.photo %}
+                            <img
+                                src="{{ student.photo.url }}"
+                                class="w-full h-full rounded-full object-cover ring-4 ring-teal-500"
+                            >
+                        {% else %}
+                            <img
+                                src="{% static 'images/default-avatar.png' %}"
+                                class="w-full h-full rounded-full object-cover ring-4 ring-gray-300"
+                            >
+                        {% endif %}
+
+                    </div>
+
+                    <!-- Name -->
+                    <div>
+                        <h1 class="text-3xl font-extrabold text-gray-800">
+                            {{ student.profile.user.get_full_name }}
+                        </h1>
+
+                        <p class="text-gray-500 mt-1">
+                            Grade: {{ student.grade }}
+                        </p>
+
+                        <div class="flex flex-wrap gap-3 mt-3">
+
+                            {% if student.is_active %}
+                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">
+                                    Active
+                                </span>
+                            {% else %}
+                                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold">
+                                    Inactive
+                                </span>
+                            {% endif %}
+
+                        </div>
+
+                        <!-- ========================= -->
+                        <!-- STATUS SECTION (Always Visible) -->
+                        <!-- ========================= -->
+                        <div class="flex flex-wrap gap-3 mt-3 text-sm">
+
+                            <span class="bg-slate-100 px-3 py-1 rounded-full font-semibold">
+                               Is on Lunch:
+                                {% if student.on_school_lunch %}
+                                    <span class="text-green-600">✅</span>
+                                {% else %}
+                                    <span class="text-red-600">❌</span>
+                                {% endif %}
+                            </span>
+
+                            <span class="bg-slate-100 px-3 py-1 rounded-full font-semibold">
+                                Is on Transport:
+                                {% if student.on_transport %}
+                                    <span class="text-green-600">✅</span>
+                                {% else %}
+                                    <span class="text-red-600">❌</span>
+                                {% endif %}
+                            </span>
+
+                            <!-- Add more statuses here if needed -->
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ========================= -->
+                <!-- INFO GRID -->
+                <!-- ========================= -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                    <!-- Personal -->
+                    <div class="bg-slate-50 p-6 rounded-xl border">
+
+                        <h2 class="font-semibold text-teal-700 mb-4">
+                            Personal Information
+                        </h2>
+
+                        <p><strong>Nationality:</strong> {{ student.nationality }}</p>
+                        <p><strong>Tribe:</strong> {{ student.tribe|default:"—" }}</p>
+                        <p><strong>Height:</strong>
+                            {{ student.height_cm|default:"—" }} cm
+                        </p>
+
+                        <p><strong>Address:</strong>
+                            {{ student.address|default:"—" }}
+                        </p>
+
+                    </div>
+
+                    <!-- Parent -->
+                    <div class="bg-slate-50 p-6 rounded-xl border">
+
+                        <h2 class="font-semibold text-teal-700 mb-4">
+                            Parent / Guardian
+                        </h2>
+
+                        <p><strong>Name:</strong> {{ student.parent_name }}</p>
+                        <p><strong>Phone:</strong> {{ student.parent_phone }}</p>
+                        <p><strong>Emergency:</strong>
+                            {{ student.emergency_contact|default:"—" }}
+                        </p>
+
+                    </div>
+
+                    <!-- Financial -->
+                    <div class="bg-slate-50 p-6 rounded-xl border">
+
+                        <h2 class="font-semibold text-teal-700 mb-4">
+                            Outstanding Balance
+                        </h2>
+
+                        <p class="text-lg">
+                            Balance:
+                            <span class="font-bold text-red-600">
+                                K {{ student.school_balance }}
+                            </span>
+                        </p>
+
+                    </div>
+
+                    <!-- Enrollment -->
+                    <div class="bg-slate-50 p-6 rounded-xl border">
+
+                        <h2 class="font-semibold text-teal-700 mb-4">
+                            Enrollment
+                        </h2>
+
+                        <p><strong>Date:</strong> {{ student.enrollment_date }}</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

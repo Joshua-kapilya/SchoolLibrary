@@ -1,22 +1,96 @@
 {% extends "base.html" %}
+{% load static %}
+
 {% block title %}{{ grade_name }} Students{% endblock %}
 
 {% block content %}
-<div class="p-6">
-    <h1 class="text-2xl font-bold text-teal-700 mb-6">{{ grade_name }} Students</h1>
+<div class="p-8 bg-gradient-to-br from-gray-50 to-teal-50 min-h-screen">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-10">
+        <h1 class="text-3xl font-extrabold text-teal-700 tracking-tight">
+            🎓 {{ grade_name }} Students
+        </h1>
+
+        <span class="bg-teal-100 text-teal-700 px-4 py-1 rounded-full text-sm font-semibold shadow-sm">
+            Total: {{ students|length }}
+        </span>
+    </div>
 
     {% if students %}
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {% for student in students %}
-        <div class="bg-white p-4 rounded-lg shadow text-center">
-            <img src="{{ student.photo.url }}" alt="{{ student.profile.user.get_full_name }}" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover">
-            <h2 class="font-semibold text-lg">{{ student.profile.user.get_full_name }}</h2>
-            <p class="text-gray-500">Age: {{ student.age }}</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+
+            {% for student in students %}
+                <a href="{% url 'students:student_detail' student.pk %}"
+                   class="group relative block rounded-2xl transform transition-all duration-300 hover:-translate-y-2">
+
+                    <!-- Glow Background -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-teal-400/20 to-blue-400/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition"></div>
+
+                    <!-- Card -->
+                    <div class="relative bg-white p-6 rounded-2xl shadow-md group-hover:shadow-2xl border border-gray-100">
+
+                        <!-- Avatar -->
+                        <div class="relative mx-auto w-28 h-28 mb-4">
+                            <div class="absolute inset-0 rounded-full bg-gradient-to-br from-teal-400 to-blue-500 p-[3px]">
+                                <div class="bg-white rounded-full p-[3px]">
+
+                                    {% if student.photo %}
+                                        <img
+                                            src="{{ student.photo.url }}"
+                                            alt="{{ student.profile.user.get_full_name }}"
+                                            class="w-full h-full rounded-full object-cover"
+                                        >
+                                    {% else %}
+                                        <img
+                                            src="{% static 'images/default-avatar.png' %}"
+                                            alt="No photo"
+                                            class="w-full h-full rounded-full object-cover opacity-70"
+                                        >
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Info -->
+                        <div class="text-center">
+                            <h2 class="font-bold text-lg text-gray-800 group-hover:text-teal-700 transition">
+                                {{ student.profile.user.get_full_name|default:student.profile.user.username }}
+                            </h2>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Age: {{ student.age }}
+                            </p>
+                        </div>
+
+                        <!-- Hover Badge -->
+                        <div class="mt-4 text-center opacity-0 group-hover:opacity-100 transition">
+                            <span class="inline-block bg-teal-600 text-white text-xs px-4 py-1 rounded-full shadow">
+                                View Profile →
+                            </span>
+                        </div>
+
+                    </div>
+                </a>
+            {% endfor %}
+
         </div>
-        {% endfor %}
-    </div>
     {% else %}
-        <p class="text-gray-600">No students found in this grade.</p>
+        <div class="bg-white p-10 rounded-xl shadow text-center text-gray-600">
+            No students found in this grade.
+        </div>
     {% endif %}
+
+    <!-- Add Student Button at Bottom (Admin Only) -->
+    {% if request.user.userprofile.role == "admin" %}
+    <div class="mt-12 text-center">
+        <a href="{% url 'students:student_add' grade_name=grade_name %}"
+           class="inline-block bg-teal-600 text-white px-8 py-3 rounded-xl shadow-lg hover:bg-teal-700 transition text-lg font-semibold">
+            + Add Student
+        </a>
+    </div>
+    {% endif %}
+
 </div>
 {% endblock %}

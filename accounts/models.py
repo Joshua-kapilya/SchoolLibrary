@@ -14,6 +14,8 @@ class UserProfile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
+    date_of_birth = models.DateField(null=True, blank=True)
+
 
     # Add fields later for teachers/parents/learners
     # Example:

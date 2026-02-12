@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}Parent Profile{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 p-6">
+
+    <div class="max-w-7xl mx-auto">
+
+        <!-- Page Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-teal-700">
+                Parent Profile
+            </h1>
+        </div>
+
+        <!-- Parent Information Card -->
+        <div class="bg-white shadow-lg rounded-2xl p-6 mb-8">
+
+            <div class="flex items-center mb-6">
+
+                <!-- Parent Photo -->
+                {% if parent.profile and parent.profile.image %}
+                    <img src="{{ parent.profile.image.url }}"
+                         class="w-24 h-24 rounded-full object-cover border-4 border-teal-500 mr-6">
+                {% else %}
+                    <div class="w-24 h-24 rounded-full bg-gray-300 border-4 border-teal-500 mr-6"></div>
+                {% endif %}
+
+                <!-- Parent Name -->
+                <div>
+                    <h2 class="text-2xl font-semibold text-gray-800">
+                        {{ parent.first_name }} {{ parent.last_name }}
+                    </h2>
+
+                    {% if parent.profile and parent.profile.user %}
+                        <p class="text-gray-600">
+                            {{ parent.profile.user.email }}
+                        </p>
+                    {% endif %}
+                </div>
+
+            </div>
+
+            <!-- Parent Details Grid -->
+            <div class="grid md:grid-cols-2 gap-4 text-gray-700">
+
+                <p><span class="font-semibold">Phone:</span> {{ parent.phone }}</p>
+                <p><span class="font-semibold">Role:</span> {{ parent.role }}</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Children Section -->
+        <div class="bg-white shadow-lg rounded-2xl p-6">
+
+            <h2 class="text-xl font-semibold text-teal-700 mb-6">
+                Children
+            </h2>
+
+            {% if students %}
+                <div class="grid md:grid-cols-2 gap-6">
+
+                    {% for student in students %}
+                        <div class="border rounded-xl p-4 hover:shadow-md transition">
+
+                            <div class="flex items-center mb-4">
+
+                                <!-- Student Photo -->
+                                {% if student.photo %}
+                                    <img src="{{ student.photo.url }}"
+                                         class="w-16 h-16 rounded-full object-cover border-2 border-gray-300 mr-4">
+                                {% else %}
+                                    <div class="w-16 h-16 rounded-full bg-gray-300 border-2 border-gray-300 mr-4"></div>
+                                {% endif %}
+
+                                <!-- Student Name -->
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800">
+                                        {{ student.first_name }} {{ student.last_name }}
+                                    </h3>
+                                    <p class="text-sm text-gray-600">
+                                        Grade: {{ student.grade.name }}
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <!-- Student Details -->
+                            <div class="grid grid-cols-1 gap-2 text-sm text-gray-700">
+
+                                <p><span class="font-medium">Nationality:</span> {{ student.nationality }}</p>
+                                <p><span class="font-medium">Tribe:</span> {{ student.tribe }}</p>
+                                <p><span class="font-medium">Height:</span> {{ student.height_cm }} cm</p>
+                                <p><span class="font-medium">School Balance:</span> K {{ student.school_balance }}</p>
+
+                                <p>
+                                    <span class="font-medium">Transport:</span>
+                                    {% if student.on_transport %}
+                                        Yes
+                                    {% else %}
+                                        No
+                                    {% endif %}
+                                </p>
+
+                                <p>
+                                    <span class="font-medium">School Lunch:</span>
+                                    {% if student.on_school_lunch %}
+                                        Yes
+                                    {% else %}
+                                        No
+                                    {% endif %}
+                                </p>
+
+                                <p>
+                                    <span class="font-medium">Status:</span>
+                                    {% if student.is_active %}
+                                        <span class="text-green-600 font-semibold">Active</span>
+                                    {% else %}
+                                        <span class="text-red-600 font-semibold">Inactive</span>
+                                    {% endif %}
+                                </p>
+
+                            </div>
+
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+                <p class="text-gray-600">No students linked to this parent.</p>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

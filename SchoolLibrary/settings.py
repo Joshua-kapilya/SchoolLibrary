@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'accounts',
     'students',
+    'parents',
 ]
 
 MIDDLEWARE = [
